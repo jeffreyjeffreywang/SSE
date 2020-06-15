@@ -20,6 +20,7 @@ parser.add_argument('--pretrain_clean', type=bool, default=False)
 parser.add_argument('--pretrain_CAE', type=str, default='cae.pkl')
 parser.add_argument('--pretrain', type=bool, default=False)
 parser.add_argument('--pretrain_MAE', type=str)
+parser.add_argument('--urban_noise', type=bool, default=False)
 args = parser.parse_args()
 
 # Directory to store all the models
@@ -31,6 +32,7 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 # Get configuration
 config = get_config(args.config_file)
+config['urban_noise'] = args.urban_noise
     
 # Setup clean, mix, test data
 train_A_files, train_B_files, test_A_files, test_B_files = get_files()
