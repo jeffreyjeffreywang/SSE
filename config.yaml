@@ -1,0 +1,92 @@
+# Dataset options: true for BBC, false for DAPS
+urban_noise: true
+
+# DAPS
+version_A: clean
+version_B: ipad_livingroom1
+dataset_size: .inf 
+
+# BBC.16K
+noise_dataset: BBC.16K
+snr: 5
+noise_class_ids:
+- 0
+num_noise_files: 10
+city: London
+
+# Data preprocessing options 
+clip_size: 32000
+sr: 16000
+b_size: 20
+num_workers: 10
+pure_noise_a: 0
+pure_noise_b: 0.3
+
+# Optimization options
+epochs_a: 700
+epochs_b: 1500
+
+lr: 0.0001
+beta1: 0.5
+beta2: 0.999
+weight_decay: 0.0001
+step_size: 1000
+gamma: 0.5
+
+# Reconstruction loss
+recon_loss_type: L2
+# EQ
+EQ: true
+all_EQ: true
+
+# Loss weights
+# Straight paths
+recon_a_w: 1
+recon_b_w: 1
+kl_a_w: 0.001
+kl_b_w: 0.001
+
+# Cross paths
+cross_w: 0.001
+cyc_recon_b_w: 10
+cyc_kl_b_w: 0.001
+recon_latent_b_w: 1
+
+# STFT options
+filter_length: 1024
+hop_length: 256
+win_length: 1024
+window: hann
+
+# Convolutional layers
+conv_dim: 1
+num_layers: 4
+dim: 512
+latent_dim: 64
+
+# Custom intermediate dimensions for convolutional layers
+# first_dim = dim, last_dim = latent_dim
+customize_dim_a: False
+inter_dims_a: 
+- 512
+- 256
+- 128
+- 64
+
+customize_dim_b: True
+inter_dims_b: 
+- 512
+- 400
+- 300
+- 200
+- 100
+- 64
+
+# Conv1d (time dimension)
+time:
+    kernel_size: 7
+    stride: 1
+    padding: 3
+
+# Magnitude spectrogram power (to reduce dynamic range)
+mag_power: 0.5
